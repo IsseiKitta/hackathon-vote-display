@@ -22,7 +22,7 @@ model Poll {
   createdBy Int
   createdAt DateTime @default(now())
 
-  user     User      @relation(fields: [createdBy], references: [id])
+  user     User      @relation(fields: [createdBy], references: [id], onDelete: Cascade)
   projects Project[]
 
   @@index([createdBy])
