@@ -1,0 +1,287 @@
+openapi: 3.0.4
+info:
+  title: ハッカソンの投票結果発表用webアプリのAPI
+  version: "1.0.0"
+servers:
+  - url: http://localhost:3000/api
+tags:
+  - name: auth
+    description: ユーザー認証関連のAPI（登録・ログイン）
+  - name: polls
+    description: 投票一覧の取得
+  - name: votes
+    description: 投票の作成と結果取得
+paths:
+  /auth/register:
+    post:
+      tags:
+        - auth
+      summary: ユーザー登録用
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - username
+                - password
+              type: object
+              properties:
+                username:
+                  type: string
+                  description: The user name for login
+                  example: "user123"
+                password:
+                  type: string
+                  example: doggie
+                  description: The password for login in clear text
+      responses:
+        "201":
+          description: ユーザー登録成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: User registered successfully
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "409":
+          $ref: "#/components/responses/Conflict"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+
+  /auth/login:
+    post:
+      tags:
+        - auth
+      summary: ログイン用
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - username
+                - password
+              type: object
+              properties:
+                username:
+                  type: string
+                  description: The user name for login
+                  example: 10
+                password:
+                  type: string
+                  example: doggie
+                  description: The password for login in clear text
+      responses:
+        "200":
+          description: ログイン成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  message:
+                    type: string
+                    example: Login successful
+                  token:
+                    type: string
+                    example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+
+  /mypage:
+    get:
+      tags:
+        - polls
+      summary: 投票情報一覧を見る
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: 投票一覧取得成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  polls:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        title:
+                          type: string
+                        createdAt:
+                          type: string
+                          format: date-time
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+
+  /vote:
+    post:
+      tags:
+        - votes
+      summary: 新たな投票結果を作る
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - title
+                - projects
+              properties:
+                title:
+                  type: string
+                  example: 技育ハッカソンvol.14
+                projects:
+                  type: array
+                  items:
+                    type: object
+                    required:
+                      - teamName
+                      - projectName
+                    properties:
+                      teamName:
+                        type: string
+                        example: チームkstm
+                      projectName:
+                        type: string
+                        example: タスク管理アプリ
+                      description:
+                        type: string
+                        example: チームで効率的にタスクを管理できるアプリ
+      responses:
+        "201":
+          description: 投票作成成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Vote created successfully
+                  voteId:
+                    type: integer
+                    example: 1
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+
+  /vote/{vote_id}:
+    get:
+      tags:
+        - votes
+      summary: 各投票結果の詳細を見る
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: vote_id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 投票ID
+      responses:
+        "200":
+          description: 投票結果取得成功
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 1
+                    teamName:
+                      type: string
+                      example: チームkstm
+                    projectName:
+                      type: string
+                      example: タスク管理アプリ
+                    description:
+                      type: string
+                      example: チームで効率的にタスクを管理できるアプリ
+                    votes:
+                      type: integer
+                      example: 42
+                    rank:
+                      type: integer
+                      example: 1
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          description: 投票 not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+
+components:
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+        - message
+
+  responses:
+    BadRequest:
+      description: 不正なリクエスト
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+
+    Unauthorized:
+      description: 認証失敗
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+
+    Conflict:
+      description: リソースの競合(既に存在してる場合など)
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+
+    InternalServerError:
+      description: サーバーエラー
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JWT認証トークン
