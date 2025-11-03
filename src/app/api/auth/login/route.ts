@@ -39,7 +39,7 @@ export async function POST(req: NextRequest) {
       userid: user.id,
     };
 
-    // undefined出ないことを示す!マーク
+    // undefinedではないことを示す!マーク
     const secret = process.env.SECRET_KEY!;
 
     const options = {
