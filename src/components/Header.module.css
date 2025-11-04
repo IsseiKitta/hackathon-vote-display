@@ -1,0 +1,21 @@
+.header {
+    background-color: rgb(50, 50, 50);
+    min-height: 60px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+    padding: 0 20px;
+    }
+
+ul.navLinks {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+    margin: 0;
+    padding: 0;
+    }
+li.navItem:hover{
+    text-decoration: underline;
+    }

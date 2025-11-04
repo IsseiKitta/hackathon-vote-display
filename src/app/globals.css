@@ -24,3 +24,12 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+.container {
+  display: flex;
+}
+aside {
+  width: 10vw;
+}
+main {
+  width: 80vw;
+}
