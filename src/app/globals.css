@@ -27,36 +27,12 @@ body {
 .container {
   display: flex;
 }
-aside {
-  width: 10vw;
-}
-main {
-  width: 80vw;
-}
 .title {
   font-size: 32px;
   font-weight: 900;
 }
 
 
-/* make form inputs visible (borders, padding, background) */
-input,
-textarea,
-select {
-  background: #ffffff;
-  border: 1px solid #323232;
-  padding: 0.5rem 0.6rem;
-  color: var(--foreground);
-  font-size: 1rem;
-}
-
-input:focus,
-textarea:focus,
-select:focus {
-  outline: none;
-  border-color: #6b7280; /* neutral-500 */
-  box-shadow: 0 0 0 3px rgba(99,102,241,0.08);
-}
 .content{
   margin: 2.5rem 0rem;
 }

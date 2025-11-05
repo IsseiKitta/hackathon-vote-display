@@ -12,13 +12,13 @@ export default function Header() {
             <Link href="/">Home</Link>
           </li>
           <li className={styles.navItem}>
-            <Link href="/about">Create New Vote</Link>
+            <Link href="/create-vote">Create New Vote</Link>
           </li>
           <li className={styles.navItem}>
-            <Link href="/about">Sign in</Link>
+            <Link href="/signin">Sign in</Link>
           </li>
           <li className={styles.navItem}>
-            <Link href="/about">Sign up</Link>
+            <Link href="/signup">Sign up</Link>
           </li>
         </ul>
       </nav>
