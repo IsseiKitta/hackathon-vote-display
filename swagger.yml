@@ -169,6 +169,9 @@ paths:
                       description:
                         type: string
                         example: チームで効率的にタスクを管理できるアプリ
+                      vote:
+                        type: integer
+                        example: 10
       responses:
         "201":
           description: 投票作成成功
