@@ -26,7 +26,7 @@ const mockResults: VoteResult[] = [
   { id: 7, rank: 7, teamName: "チームG", projectName: "コミュニティプラットフォーム", description: "", votes: 45 },
   { id: 8, rank: 8, teamName: "チームH", projectName: "レシピ共有サービス", description: "", votes: 38 },
   { id: 9, rank: 9, teamName: "チームI", projectName: "学習支援ツール", description: "", votes: 30 },
-  { id: 10, rank: 10, teamName: "チームJ", projectName: "イベント管理システム", description: "", votes: 15 },
+  { id: 10, rank: 10, teamName: "チームJ", projectName: "イベント管理システム", description: "", votes: 1 },
 ];
 
 // ============================================
@@ -289,7 +289,6 @@ function ResultCard({ result, maxVotes, delay }: ResultCardProps) {
         <h2 className={styles.teamName}>{result.teamName}</h2>
         <p className={styles.projectName}>{result.projectName}</p>
       </div>
-
       {/* 🎬 棒グラフ（右から伸びる） */}
       <div className={styles.barContainer}>
         <motion.div

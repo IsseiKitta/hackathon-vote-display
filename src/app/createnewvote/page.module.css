@@ -9,7 +9,7 @@
 
 .sectionTitle {
   font-size: 20px;
-  font-weight: 600;
+  font-weight: 700;
   margin-top: 2rem;
   margin-bottom: 1rem;
   color: var(--foreground);
@@ -33,7 +33,7 @@
 .teamTitle {
   margin: 0;
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--foreground);
 }
 
@@ -44,7 +44,7 @@
   padding: 0.5rem 1rem;
   cursor: pointer;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 700;
   transition: background-color 0.2s;
 }
 
@@ -75,4 +75,7 @@
     gap: 1rem;
     margin-top: 2rem;
     flex-direction: column;
+}
+.spacer {
+  flex-grow: 5;
 }

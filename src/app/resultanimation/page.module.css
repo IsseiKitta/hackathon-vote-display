@@ -52,8 +52,8 @@
 }
 
 .rankBadge {
-  width: 70px;
-  height: 70px;
+  width: 60px;
+  height: 60px;
   margin: auto;
   border-radius: 50%;
   display: flex;
@@ -73,24 +73,18 @@
   background: rgba(251, 191, 36, 0.3);
   border-color: rgba(255, 255, 255, 0.5);
   font-size: 36px;
-  width: 80px;
-  height: 80px;
 }
 
 .rankBadge.rank2 {
   background: rgba(148, 163, 184, 0.3);
   border-color: rgba(255, 255, 255, 0.5);
   font-size: 34px;
-  width: 76px;
-  height: 76px;
 }
 
 .rankBadge.rank3 {
   background: rgba(251, 146, 60, 0.3);
   border-color: rgba(255, 255, 255, 0.5);
   font-size: 32px;
-  width: 72px;
-  height: 72px;
 }
 
 .teamInfo {
@@ -118,7 +112,7 @@
 
 .projectName {
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 700;
   color: #4b5563;
   margin: 0;
   white-space: nowrap;
@@ -142,12 +136,10 @@
   height: 100%;
   display: flex;
   align-items: center;
+  background: rgba(255, 255, 255, 0.25);
   justify-content: flex-end;
-  padding: 0 5rem;
-  background: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(5px);
   border-right: 3px solid rgba(255, 255, 255, 0.4);
-  min-width: 80px;
 }
 
 /* 順位別の票数サイズ */
@@ -184,6 +176,7 @@
   color: white;
   white-space: nowrap;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  -webkit-text-stroke: #64748b 0.5px;
 }
 
 .voteLabel {
