@@ -22,7 +22,7 @@
   padding: 0;
   overflow: hidden;
   display: grid;
-  grid-template-columns: 80px 280px 1fr;
+  grid-template-columns: 80px 280px 60px 1fr;  /* 4カラム: バッジ | チーム情報 | スペーサー | バー */
   align-items: stretch;
   gap: 0;
   min-height: 120px;
@@ -30,10 +30,10 @@
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.resultCard:hover {
+/* .resultCard:hover {
   transform: translateX(-8px);
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-}
+} */
 
 .resultCard.rank1 {
   background: linear-gradient(90deg, #fbbf24 0%, #f59e0b 100%);
@@ -140,6 +140,9 @@
   justify-content: flex-end;
   backdrop-filter: blur(5px);
   border-right: 3px solid rgba(255, 255, 255, 0.4);
+  padding: 0 2rem;
+  min-width: 5%;
+  z-index: 8;
 }
 
 /* 順位別の票数サイズ */
@@ -193,4 +196,10 @@
   transform: translateY(-50%);
   z-index: 50;
   filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3));
+}
+.spacer {
+  /* スペーサーは空の領域として機能 */
+  min-width: 60px;  
+  height: 100%;
+  background: rgba(255, 255, 255, 0.25);
 }

@@ -246,7 +246,8 @@ function ResultCard({ result, maxVotes, delay }: ResultCardProps) {
         result.rank <= 3 ? styles[`rank${result.rank}`] : ""
       }`}
       variants={cardVariants}
-      whileHover={{ scale: 1.01, x: -5 }}
+      // whileHover={{ scale: 1.01, x: -2.5 }}
+      whileHover={{ scale: 1.0, x: -0 }}
     >
       {/* トロフィー（1-3位のみ） */}
       {result.rank <= 3 && (
@@ -289,6 +290,10 @@ function ResultCard({ result, maxVotes, delay }: ResultCardProps) {
         <h2 className={styles.teamName}>{result.teamName}</h2>
         <p className={styles.projectName}>{result.projectName}</p>
       </div>
+      
+      {/* スペーサー（チーム情報とバーの間の空白） */}
+      <div className={styles.spacer}></div>
+      
       {/* 🎬 棒グラフ（右から伸びる） */}
       <div className={styles.barContainer}>
         <motion.div
