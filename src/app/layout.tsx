@@ -13,8 +13,8 @@ const zenKakuGothicNew = Zen_Kaku_Gothic_New({
 });
 
 export const metadata: Metadata = {
-  title: "My App",
-  description: "...",
+  title: "HRV",
+  description: "Hackathon Result Visualizer",
 };
 
 export default function RootLayout({

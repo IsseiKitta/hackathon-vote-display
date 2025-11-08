@@ -42,12 +42,29 @@ export async function GET(
       );
     }
 
-    const voteData = await prisma.project.findMany({
+    const projects = await prisma.project.findMany({
       where: { pollId: voteId },
       orderBy: { votes: "desc" },
     });
 
-    return NextResponse.json({ voteData }, { status: 200 });
+    if (projects.length === 0) {
+      return NextResponse.json(
+        { message: "Vote not found" },
+        { status: 404 }
+      );
+    }
+
+    // ランク付けしたデータを作成
+    const rankedProjects = projects.map((project, index) => ({
+      id: project.id,
+      teamName: project.teamName,
+      projectName: project.projectName,
+      description: project.description || "",
+      votes: project.votes,
+      rank: index + 1,
+    }));
+
+    return NextResponse.json(rankedProjects, { status: 200 });
   } catch (err) {
     if (err instanceof jwt.JsonWebTokenError) {
       return NextResponse.json({ message: "Unauthorized" }, { status: 401 });

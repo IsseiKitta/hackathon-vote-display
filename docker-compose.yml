@@ -13,12 +13,13 @@ services:
       - DATABASE_URL=postgres://myuser:mypassword@db:5432/mydb
       - SECRET_KEY=u%KZqya28c4EMxNv,,N=uxgM/F^J&5Zc
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     command:
       [
         "sh",
         "-c",
-        "bun run prisma:generate && bun run prisma:seed && bun run dev",
+        "bun run prisma:generate && bunx prisma db push && bun run prisma:seed && bun run dev",
       ]
 
   db:
@@ -31,6 +32,11 @@ services:
       - POSTGRES_USER=myuser
       - POSTGRES_PASSWORD=mypassword
       - POSTGRES_DB=mydb
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U myuser -d mydb"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
 volumes:
   pg_data:
