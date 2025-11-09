@@ -6,6 +6,13 @@ const prisma = new PrismaClient();
 async function main() {
   console.log("Start seeding...");
 
+  // Clean existing data
+  console.log("Cleaning existing data...");
+  await prisma.project.deleteMany({});
+  await prisma.poll.deleteMany({});
+  await prisma.user.deleteMany({});
+  console.log("Existing data cleaned.");
+
   // Create 3 users
   const users = await Promise.all([
     prisma.user.create({

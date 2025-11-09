@@ -3,18 +3,19 @@ import { Zen_Kaku_Gothic_New } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { AuthProvider } from "@/context/AuthContext";
 
 // 2. フォントを設定 (必要なウェイトやサブセットを指定)
 const zenKakuGothicNew = Zen_Kaku_Gothic_New({
   subsets: ["latin"], // 'latin' は欧文文字用に推奨されます
   weight: ["400", "700", "900"], // 必要なウェイトを配列で指定
-  display: 'swap', // フォントの読み込み戦略
+  display: "swap", // フォントの読み込み戦略
   preload: true, // フォントのプリロードを有効化
 });
 
 export const metadata: Metadata = {
-  title: "My App",
-  description: "...",
+  title: "Hackathon Result Visualizer",
+  description: "Hackathon Result Visualizer",
 };
 
 export default function RootLayout({
@@ -25,12 +26,14 @@ export default function RootLayout({
   return (
     <html lang="ja">
       {/* 3. <head>タグから<link>タグは削除する */}
-      <head /> 
+      <head />
       {/* 4. bodyタグのclassNameにフォント変数を適用 */}
       <body className={zenKakuGothicNew.className}>
-        <Header />
-        {children}
-        <Footer />
+        <AuthProvider>
+          <Header />
+          {children}
+          <Footer />
+        </AuthProvider>
       </body>
     </html>
   );
