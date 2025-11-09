@@ -29,7 +29,28 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   useEffect(() => {
-    checkAuth();
+    let isMounted = true;
+
+    const performAuthCheck = async () => {
+      try {
+        const res = await fetch('/api/mypage', {
+          credentials: 'include',
+        });
+        if (isMounted) {
+          setIsLoggedIn(res.ok);
+        }
+      } catch {
+        if (isMounted) {
+          setIsLoggedIn(false);
+        }
+      }
+    };
+
+    performAuthCheck();
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   return (
