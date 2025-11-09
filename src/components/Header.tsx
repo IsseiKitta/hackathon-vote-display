@@ -2,27 +2,13 @@
 
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useState, useEffect } from 'react';
+import { useContext } from 'react';
+import { AuthContext } from '@/context/AuthContext';
 import styles from './Header.module.css'; // 専用のCSSを読み込む（例）
 
 export default function Header() {
   const router = useRouter();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  useEffect(() => {
-    // ログイン状態をチェック
-    const checkAuth = async () => {
-      try {
-        const res = await fetch('/api/mypage', {
-          credentials: 'include',
-        });
-        setIsLoggedIn(res.ok);
-      } catch {
-        setIsLoggedIn(false);
-      }
-    };
-    checkAuth();
-  }, []);
+  const { isLoggedIn } = useContext(AuthContext);
 
   const handleTitleClick = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -35,9 +21,13 @@ export default function Header() {
 
   return (
     <header className={styles.header}>
-      <a href="#" onClick={handleTitleClick} style={{ cursor: 'pointer', textDecoration: 'none', color: 'inherit' }}>
+      <button
+        type="button"
+        onClick={handleTitleClick}
+        className={styles.titleLink}
+      >
         ハッカソン結果ビジュアライザー
-      </a>
+      </button>
       <nav>
         <ul className={styles.navLinks}>
           <li className={styles.navItem}>

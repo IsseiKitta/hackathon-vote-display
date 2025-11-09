@@ -3,13 +3,15 @@
 import PageShell from "@/components/PageShell";
 import Button from "@/components/Button";
 import FormField from "@/components/FormField";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useRouter } from "next/navigation";
+import { AuthContext } from "@/context/AuthContext";
 
 export default function Home() {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
+  const { setIsLoggedIn } = useContext(AuthContext);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,6 +33,9 @@ export default function Home() {
         alert(error.message || "ログインに失敗しました");
         return;
       }
+
+      // 認証状態を更新
+      setIsLoggedIn(true);
 
       // マイページにリダイレクト
       router.push("/mypage");

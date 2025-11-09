@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import PageShell from "@/components/PageShell";
 import Button from "@/components/Button";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { AuthContext } from "@/context/AuthContext";
 import styles from "./page.module.css";
 
 type Poll = {
@@ -18,8 +19,17 @@ export default function MyPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
+  const { isLoggedIn } = useContext(AuthContext);
 
   useEffect(() => {
+    // Check authentication before fetching
+    if (!isLoggedIn) {
+      setError("ログインが必要です");
+      setLoading(false);
+      router.push("/");
+      return;
+    }
+
     const fetchPolls = async () => {
       try {
         const res = await fetch("/api/mypage", {
@@ -29,7 +39,7 @@ export default function MyPage() {
 
         if (!res.ok) {
           if (res.status === 401) {
-            alert("ログインが必要です");
+            setError("ログインが必要です");
             router.push("/");
             return;
           }
@@ -47,7 +57,7 @@ export default function MyPage() {
     };
 
     fetchPolls();
-  }, [router]);
+  }, [router, isLoggedIn]);
 
   if (loading) {
     return (

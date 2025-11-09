@@ -3,6 +3,7 @@ import { Zen_Kaku_Gothic_New } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { AuthProvider } from "@/context/AuthContext";
 
 // 2. フォントを設定 (必要なウェイトやサブセットを指定)
 const zenKakuGothicNew = Zen_Kaku_Gothic_New({
@@ -28,9 +29,11 @@ export default function RootLayout({
       <head />
       {/* 4. bodyタグのclassNameにフォント変数を適用 */}
       <body className={zenKakuGothicNew.className}>
-        <Header />
-        {children}
-        <Footer />
+        <AuthProvider>
+          <Header />
+          {children}
+          <Footer />
+        </AuthProvider>
       </body>
     </html>
   );

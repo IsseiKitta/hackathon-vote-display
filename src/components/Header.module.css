@@ -19,3 +19,15 @@ ul.navLinks {
 li.navItem:hover{
     text-decoration: underline;
     }
+
+.titleLink {
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    background: none;
+    border: none;
+    padding: 0;
+    font: inherit;
+    font-size: 1.2rem;
+    font-weight: bold;
+    }

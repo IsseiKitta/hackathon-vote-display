@@ -21,7 +21,6 @@ export default function PollDetailPage() {
   const voteId = params.voteId as string;
 
   const [projects, setProjects] = useState<Project[]>([]);
-  const [pollTitle, setPollTitle] = useState("ハッカソン名");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -87,7 +86,7 @@ export default function PollDetailPage() {
     <PageShell>
       <div className={styles.container}>
         <div className={styles.header}>
-          <h1 className="title">提出作品一覧 {pollTitle}</h1>
+          <h1 className="title">提出作品一覧</h1>
           <Link href={`/resultanimation?voteId=${voteId}`}>
             <Button>ハイライトを見る</Button>
           </Link>
@@ -101,7 +100,7 @@ export default function PollDetailPage() {
               <div key={project.id} className={styles.projectCard}>
                 <div className={styles.projectInfo}>
                   <h2 className={styles.projectTitle}>
-                    作品目 {project.projectName}
+                    作品名 {project.projectName}
                   </h2>
                   <p className={styles.teamName}>チーム名 {project.teamName}</p>
                   <p className={styles.votes}>得票数 {project.votes}</p>
