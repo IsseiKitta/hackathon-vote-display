@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "結果発表 - HRV",
+  title: "Hackathon Result Visualizer",
   description: "Hackathon Result Visualizer",
 };
 
